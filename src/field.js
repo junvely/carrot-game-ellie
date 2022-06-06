@@ -22,6 +22,7 @@ export default class Field {
     if (target.matches(".carrot")) {
       target.remove();
       sound.playCarrot(); // this.가 객체를 반환하지x , this.onItemClick이 undefined
+      this.score++; //
       this.onItemClick && this.onItemClick("carrot");
     } else if (target.matches(".bug")) {
       this.onItemClick && this.onItemClick("bug");
