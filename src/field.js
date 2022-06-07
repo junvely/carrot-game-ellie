@@ -4,9 +4,11 @@ import * as sound from "./sound.js";
 const CARROT_SIZE = 80;
 
 export default class Field {
-  constructor(carrotCount, bugCount) {
+  constructor(carrotCount, bugCount, started) {
     this.carrotCount = carrotCount;
     this.bugCount = bugCount;
+    this.started = started;
+
     this.field = document.querySelector(".game__field");
     this.fieldRect = this.field.getBoundingClientRect();
     this.onClick = this.onClick.bind(this);
@@ -19,10 +21,13 @@ export default class Field {
 
   onClick = (event) => {
     const target = event.target;
+    if (!this.started) {
+      return;
+    }
     if (target.matches(".carrot")) {
       target.remove();
-      sound.playCarrot(); // this.가 객체를 반환하지x , this.onItemClick이 undefined
-      this.score++; //
+      sound.playCarrot();
+      this.score++;
       this.onItemClick && this.onItemClick("carrot");
     } else if (target.matches(".bug")) {
       this.onItemClick && this.onItemClick("bug");
