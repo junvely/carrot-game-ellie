@@ -3,7 +3,13 @@
 import Field from "./field.js";
 import * as sound from "./sound.js";
 
-export default class GameBuilder {
+export const Reason = Object.freeze({
+  win: "win",
+  lose: "lose",
+  cancel: "cancel",
+});
+
+export class GameBuilder {
   carrotCount(num) {
     this.carrotCount = num;
     return this;
@@ -75,7 +81,7 @@ class Game {
     this.hideStartButton();
     sound.playAlert();
     sound.stopBackground();
-    this.onGameStop && this.onGameStop("cancel");
+    this.onGameStop && this.onGameStop(Reason.cancel);
   }
 
   finish(win) {
@@ -89,7 +95,7 @@ class Game {
     }
     this.stopGameTimer();
     sound.stopBackground();
-    this.onGameStop && this.onGameStop(win ? "win" : "lose");
+    this.onGameStop && this.onGameStop(win ? Reason.win : Reason.lose);
   }
 
   initGame() {
