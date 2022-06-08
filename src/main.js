@@ -10,9 +10,9 @@ gameFinishBanner.setClickListener(() => {
 });
 
 const game = new GameBuilder()
-  .carrotCount(5) //
-  .bugCount(5) //
-  .gameDuration(5) //
+  .carrotCount(10) //
+  .bugCount(10) //
+  .gameDuration(10) //
   .build();
 
 game.setGameStopListener((reason) => {
